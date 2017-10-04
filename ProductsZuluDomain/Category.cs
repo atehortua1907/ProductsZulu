@@ -1,6 +1,4 @@
-﻿
-
-namespace ProductsZuluDomain
+﻿namespace ProductsZuluDomain
 {
     using Newtonsoft.Json;
     using System.Collections.Generic;

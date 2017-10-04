@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProductsZulu.Views.LoginView"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             Title="Login">
+    <ContentPage.Content>
+        
+        <StackLayout
+            BindingContext="{Binding Login}"
+            Padding="8"
+            Spacing="16">
+            <Label
+                FontAttributes="Bold"
+                FontSize="Large"
+                HorizontalOptions="Center"
+                Text="Products">                
+            </Label>
+            <Grid
+                Margin="50,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                
+                <Label
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    Text="Email:"
+                    VerticalOptions="Center">                    
+                </Label>
+                <Entry
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    Keyboard="Email"
+                    Placeholder="Enter Your Email"
+                    Text="{Binding Email, Mode=TwoWay}">                    
+                </Entry>
+
+                <Label
+                    Grid.Column="0"
+                    Grid.Row="1"
+                    Text="Password:">
+                </Label>
+                <Entry
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    IsPassword="True"
+                    Placeholder="Enter Your Password..."
+                    Text="{Binding Password, Mode=TwoWay}">
+                </Entry>
+
+            </Grid>
+            <StackLayout
+                HorizontalOptions="Center"
+                Orientation="Horizontal">
+                <Label
+                    Text="Remenberme"
+                    VerticalOptions="Center">                    
+                </Label>
+                <Switch
+                    IsToggled="{Binding IsToggled, Mode=TwoWay}">                    
+                </Switch>
+            </StackLayout>
+            <Label
+                HorizontalOptions="Center"
+                Text="Forgot Your PassWord"
+                TextColor="Blue">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding RecoverPasswordCommand}"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <ActivityIndicator
+                IsRunning="{Binding IsRunning,Mode=TwoWay}">                
+            </ActivityIndicator>
+            <StackLayout
+                Margin="50,0">
+                <Button
+                    Command="{Binding LoginCommand}"
+                    BackgroundColor="Navy"
+                    BorderRadius="23"
+                    HeightRequest="46"
+                    IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                    Margin="50,0"
+                    Text="Login"
+                    TextColor="White">
+                </Button>
+                <Button
+                    Command="{Binding RegisterNewUserCommand}"
+                    BackgroundColor="Purple"
+                    BorderRadius="23"
+                    HeightRequest="55"
+                    IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                    Margin="50,0"
+                    Text="Register New User"
+                    TextColor="White">
+                </Button>
+                <Button
+                    Command="{Binding LoginWithFacebookCommand}"
+                    BackgroundColor="Blue"    
+                    BorderRadius="23"
+                    HeightRequest="55"
+                    IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                    Margin="50,0"
+                    Text="Login With Facebook"
+                    TextColor="White">
+                </Button>
+            </StackLayout>
+        </StackLayout>
+        
+    </ContentPage.Content>
+</ContentPage>

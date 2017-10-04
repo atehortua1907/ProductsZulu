@@ -1,7 +1,8 @@
-﻿
-namespace ProductsZulu.API.Controllers
+﻿namespace ProductsZulu.API.Controllers
 {
+    using ProductsZulu.API.Models;
     using ProductsZuluDomain;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     using System.Linq;
@@ -15,9 +16,40 @@ namespace ProductsZulu.API.Controllers
         private DataContext db = new DataContext();
 
         // GET: api/Categories
-        public IQueryable<Category> GetCategories()
+        public async Task<IHttpActionResult> GetCategories()
         {
-            return db.Categories;
+            //Este metodo arma una lista de productos dentro del objeto category
+            //El objeto category y products fueron modificados en el API para poder
+            //Recibir la lista armada
+            var categories = await db.Categories.ToArrayAsync();
+            var categoriesResponse = new List<CategoryResponse>();
+
+            foreach (var category in categories)
+            {
+                var productsResponse = new List<ProductResponse>();
+                foreach (var product in category.Products)
+                {
+                    productsResponse.Add(new ProductResponse
+                    {
+                        Description = product.Description,
+                        Image = product.Image,
+                        IsActtive = product.IsActtive,
+                        LastPurchase = product.LastPurchase,
+                        Price = product.Price,
+                        ProductId = product.ProductId,
+                        Remarks = product.Remarks,
+                        Stock = product.Stock
+                    });
+                }
+                categoriesResponse.Add(new CategoryResponse
+                {
+                    CategoryId = category.CategoryId,
+                    Description = category.Description,
+                    Products = productsResponse,
+                });
+            }
+
+            return Ok(categoriesResponse); //Ok => deserializa a un objeto Json
         }
 
         // GET: api/Categories/5

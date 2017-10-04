@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Xamarin.Forms;
-
-namespace ProductsZulu
+﻿namespace ProductsZulu
 {
+    using Views;
+    using Xamarin.Forms;
+
     public partial class App : Application
     {
         public App()
         {
             InitializeComponent();
 
-            MainPage = new ProductsZulu.MainPage();
+            MainPage = new NavigationPage(new LoginView());
         }
 
         protected override void OnStart()
