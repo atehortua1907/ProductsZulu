@@ -1,12 +1,19 @@
-﻿using System.Data.Entity;
-
-namespace ProductsZuluDomain
+﻿namespace ProductsZuluDomain
 {
+    using System.Data.Entity;
+    using System.Data.Entity.ModelConfiguration.Conventions;
+
     public class DataContext : DbContext
     {
         public DataContext() : base("DefaultConnection")
         {
 
+        }
+
+        //Deshabilita borrado en cascada
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
         }
 
         public DbSet<Category> Categories { get; set; }

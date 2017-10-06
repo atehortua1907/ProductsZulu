@@ -2,10 +2,8 @@
 {
     using GalaSoft.MvvmLight.Command;
     using ProductsZulu.Services;
-    using ProductsZulu.Views;
     using System.ComponentModel;
     using System.Windows.Input;
-    using Xamarin.Forms;
 
     public class LoginViewModel : INotifyPropertyChanged
     {
@@ -24,6 +22,7 @@
         #region Services
         ApiService apiService;
         DialogService dialogService;
+        NavigationService navigationService;
         #endregion
 
         #region Properties
@@ -113,6 +112,7 @@
         {
             apiService = new ApiService();
             dialogService = new DialogService();
+            navigationService = new NavigationService();
 
             Email = "jzuluaga55@gmail.com";
             Password = "123456";
@@ -192,8 +192,7 @@
             var mainViewModel = MainViewModel.GetInstance();
             mainViewModel.Token = tokenResponse;
             mainViewModel.Categories = new CategoriesViewModel();
-            await Application.Current.MainPage.Navigation.PushAsync(
-                new CategoriesView()); //Pintamos la vista de categories
+            await navigationService.Navigate("CategoriesView");//Pintamos la vista de categories
 
             Email = null;
             Password = null;

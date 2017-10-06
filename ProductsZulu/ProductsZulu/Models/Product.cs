@@ -12,5 +12,15 @@
         public DateTime LastPurchase { get; set; }
         public double Stock { get; set; }
         public string Remarks { get; set; }
+
+        public string  ImageFullPath
+        {
+            get
+            {
+                return string.Format("http://productszulu.azurewebsites.net/{0}",
+                    Image.Substring(1)); // retorna la imagen concatenando la url y eliminando la ~
+            }
+        }
+
     }
 }
